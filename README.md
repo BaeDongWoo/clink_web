@@ -13,10 +13,35 @@
 
 > 4인
 
+### 🔨기술 스택
+
+---
+
+<div align=left>
+
+### ✔️Frond-End
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white">
+
+<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> 
+
+### ✔️Back-End
+
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+
+  <br>
+
+### ✔️DB
+
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+</div>
+
 ### 프로젝트 기획 배경
 
-> 코로나 시대를 겪으면서 자신의 경험가치를 위한 다양한 소비전략(무지출 챌린지, 거지방, 디지털 폐지줍기 등)이 유행하고 있습니다.
-> 땡그랑은 자신만의 목표금액을 설정하고 일일 단위로 해당 목표에 도전하며 자동 저축하는 챌린지형 저축 서비스를 제공합니다.
+코로나 시대를 겪으면서 자신의 경험가치를 위한 다양한 소비전략(무지출 챌린지, 거지방, 디지털 폐지줍기 등)이 유행하고 있습니다.
+땡그랑은 자신만의 목표금액을 설정하고 일일 단위로 해당 목표에 도전하며 자동 저축하는 챌린지형 저축 서비스를 제공합니다.
 > ![image (2)](https://github.com/BaeDongWoo/clink_web/assets/114900672/e96a5f3a-a535-441c-a733-fee90ba8e3f0)
 
 ### 프로젝트 상세 
@@ -59,7 +84,9 @@
 2. 구현 시 테스트를 위해 필요한 거래내역을 만들기 위해 가상의 인물 정보와 JSON형식의 반환 타입이 포함된 프롬프트를 작성하고 ChatGPT API를 통해 데이터를 생성했습니다.
 
 <h4>Scheduler 사용</h4>
+
 스프링 부트의 Scheduler를 사용해 정해진 시간마다 데이터를 생성합니다. 
+
 1. 뉴스 정보의 경우 1시간 마다 새로운 뉴스 정보를 크롤링해 저장하고 기존의 정보를 삭제합니다.
 2. 매일 오전6시 새로운 가상의 데이터를 생성하고 데이터 베이스에 저장하고, 챌린지 달성 여부를 저장하고 초기화 합니다.
 
