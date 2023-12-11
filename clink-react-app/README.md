@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# 땡그랑
+![땡그랑_title-002 (2)](https://github.com/BaeDongWoo/clink_web/assets/114900672/7dfb2a70-1d87-406d-b05f-f0fb3879adb1)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 땡그랑이란?
 
-## Available Scripts
+> mz세대를 위한 챌린지형 저축 서비스
 
-In the project directory, you can run:
+### 📅개발 기간
 
-### `npm start`
+> 2023.06.26~2023.08.18
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 😄개발 인원
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> 4인
 
-### `npm test`
+### 프로젝트 기획 배경
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> 코로나 시대를 겪으면서 자신의 경험가치를 위한 다양한 소비전략(무지출 챌린지, 거지방, 디지털 폐지줍기 등)이 유행하고 있습니다.
+> 땡그랑은 자신만의 목표금액을 설정하고 일일 단위로 해당 목표에 도전하며 자동 저축하는 챌린지형 저축 서비스를 제공합니다.
+> ![image (2)](https://github.com/BaeDongWoo/clink_web/assets/114900672/e96a5f3a-a535-441c-a733-fee90ba8e3f0)
 
-### `npm run build`
+### 프로젝트 상세 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 💡주요 기능
+> 1. 사용자는 저축계좌와 출금계좌, 일일 목표 금액을 설정합니다.
+> 2. 목표 금액보다 적은 금액을 사용했을 때에는 챌린지 성공 -> 차액 저축
+> 3. 목표 금액보다 많은 금액을 사용했을 때에는 챌린지 실패
+> 4. 스트릭과 그래프등 시각 자료를 통해 자신의 소비습관 확인
+> 5. 커뮤니티를 통해 금융 뉴스 정보 확인 및 다른 사용자들과 정보 공유
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 📓서비스 화면
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![땡그랑_화면-001](https://github.com/BaeDongWoo/clink_web/assets/114900672/4f277b65-2d7a-4868-9b6e-4be7c664878f)
 
-### `npm run eject`
+#### 구현 상세
+<h4>시스템 구조</h4>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 총 4대의 AWS EC2를 사용하여 각각 젠킨스, DB, 스프링 부트, 리액트 서버로 활용했습니다.
+- 스프링 부트의 경우 GitHub를 통해 배포하게 되면 젠킨스와 Docker를 사용해 구축한 파이프라인을 통해 스프링 부트 서버로 자동으로 배포하도록 구현했습니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![땡그랑_화면-004](https://github.com/BaeDongWoo/clink_web/assets/114900672/c72dbbe2-9143-45b8-a948-274dbba75be9)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h4>JWT 토큰</h4>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 사용자 로그인 시 JWT 토큰을 발급
+- 서버 호출시 토큰을 사용해 사용자 인증
 
-## Learn More
+<h4>Crawling을 통한 실시간 뉴스 정보</h4>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 오픈 API에서 제공하지 않는 카테고리와 이미지를 직접 가져오고, 실시간으로 변하는 뉴스 정보를 위해 Jsoup 라이브러리를 사용해 뉴스 정보를 직접 크롤링해 정보를 제공합니다.
+  
+![image (1)](https://github.com/BaeDongWoo/clink_web/assets/114900672/3cf39d10-2925-4ba7-a453-e959b0b4fd59)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h4>ChatGPT 활용</h4>
 
-### Code Splitting
+1. 뉴스 정보를 크롤링 할때 발생하는 중복 내용을 필터링 하기 위해 자연어 처리 모델인 ChatGPT API를 활용 했습니다.
+   - 총 20개의 뉴스 정보를 가져오고 제목을 비교해 최대한 서로 다른 10개의 뉴스 정보를 필터링
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. 구현 시 테스트를 위해 필요한 거래내역을 만들기 위해 가상의 인물 정보와 JSON형식의 반환 타입이 포함된 프롬프트를 작성하고 ChatGPT API를 통해 데이터를 생성했습니다.
 
-### Analyzing the Bundle Size
+<h4>Scheduler 사용</h4>
+스프링 부트의 Scheduler를 사용해 정해진 시간마다 데이터를 생성합니다. 
+1. 뉴스 정보의 경우 1시간 마다 새로운 뉴스 정보를 크롤링해 저장하고 기존의 정보를 삭제합니다.
+2. 매일 오전6시 새로운 가상의 데이터를 생성하고 데이터 베이스에 저장하고, 챌린지 달성 여부를 저장하고 초기화 합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 서비스 영상
 
-### Making a Progressive Web App
+#### 신규 회원
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+https://github.com/BaeDongWoo/clink_web/assets/114900672/be2aff7b-9748-40c8-b2a9-3f6e4104001a
 
-### Advanced Configuration
+#### 신규 회원 등록
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+https://github.com/BaeDongWoo/clink_web/assets/114900672/e23f7445-9fe8-4c87-9368-7bbcb70665ba
 
-### Deployment
+#### 기존 회원
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+https://github.com/BaeDongWoo/clink_web/assets/114900672/88a24486-a622-4757-b5de-61537e1a3833
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
